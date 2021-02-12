@@ -11,32 +11,58 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
+import { getSuggestedQuery } from "@testing-library/react";
 
 export default class App extends Component {
   state = {
     isLoggedIn: false,
     username: null,
-    redirect: null,
+    alert: false,
   };
 
+  //fetch calls
   logIn = (username) => {
-    // GET user data
-    console.log("logging in");
-    this.setState({
-      isLoggedIn: true,
-      username: username,
-    });
+    // get user data
+    let url = `http://localhost:3000/users/${username}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((user) => {
+        if (user.message) {
+          alert(user.message);
+          return;
+        }
+        this.setState({
+          isLoggedIn: true,
+          username: user.username,
+        });
+      });
   };
 
   signUp = (username) => {
     // POST new user
     // setState loggedIn true, currentUsername username
-    this.setState({
-      isLoggedIn: true,
-      username: username,
-    });
-    console.log("signing up");
+    fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json",
+      },
+      body: JSON.stringify({ username: username }),
+    })
+      .then((res) => res.json())
+      .then((user) => {
+        if (user.message) {
+          alert(user.message);
+          return;
+        }
+        this.setState({
+          isLoggedIn: true,
+          username: username,
+        });
+      });
   };
+
+  renderMessage = (message) => {};
 
   logOut = () => {
     this.setState({
