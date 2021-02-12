@@ -8,7 +8,7 @@ import LogInContainer from "./components/LogInContainer";
 import { useRoutes } from "hookrouter";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [currentUserName, setCurrentUsername] = useState(null);
 
   const logIn = (username) => {
