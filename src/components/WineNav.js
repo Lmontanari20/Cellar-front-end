@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+
 const WineNav = (props) => {
   return (
     <Fragment>
@@ -27,12 +28,20 @@ const WineNav = (props) => {
           ) : null}
         </Nav>
         <Nav>
-          <LinkContainer to="/log-in">
-            <Nav.Link>Log In</Nav.Link>
-          </LinkContainer>
-          <LinkContainer to="/sign-up">
-            <Nav.Link>Sign Up</Nav.Link>
-          </LinkContainer>
+          {!props.loggedIn ? (
+            <Fragment>
+              <LinkContainer to="/log-in">
+                <Nav.Link>Log In</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/sign-up">
+                <Nav.Link>Sign Up</Nav.Link>
+              </LinkContainer>
+            </Fragment>
+          ) : (
+            <LinkContainer to="/">
+              <Nav.Link onClick={props.handleLogOut}>Log Out</Nav.Link>
+            </LinkContainer>
+          )}
         </Nav>
       </Navbar>
     </Fragment>

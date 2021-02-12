@@ -38,12 +38,22 @@ export default class App extends Component {
     console.log("signing up");
   };
 
+  logOut = () => {
+    this.setState({
+      isLoggedIn: false,
+      username: null,
+    });
+  };
+
   render() {
     return (
       <Fragment>
         <Router>
           <header className="App-header">
-            <WineNav loggedIn={this.state.isLoggedIn} />
+            <WineNav
+              loggedIn={this.state.isLoggedIn}
+              handleLogOut={this.logOut}
+            />
           </header>
           <Switch>
             <Route
@@ -86,40 +96,3 @@ export default class App extends Component {
     );
   }
 }
-
-// function App() {
-//   const [loggedIn, setLoggedIn] = useState(true);
-//   const [currentUserName, setCurrentUsername] = useState(null);
-
-//   const logIn = (username) => {
-//     // GET user data
-//     console.log("logging in");
-//     setLoggedIn(true);
-//     setCurrentUsername(username);
-//   };
-
-//   const signUp = (username) => {
-//     // POST new user
-//     // setState loggedIn true, currentUsername username
-//     console.log("signing up");
-//   };
-
-//   const routes = {
-//     "/": () => <GuiPage selectedForm={null} loggedIn={loggedIn} />,
-//     "/add-section": () => <GuiPage selectedForm="add-section" />,
-//     "/add-bottle": () => <GuiPage selectedForm="add-bottle" />,
-//     "/filter": () => <GuiPage selectedForm="filter" />,
-//     "/all-bottles": () => <Bottles />,
-//     "/log-in": () => <LogInContainer formType="log-in" logIn={logIn} />,
-//     "/sign-up": () => <LogInContainer formType="sign-up" logIn={signUp} />,
-//   };
-
-//   const routeResult = useRoutes(routes);
-
-//   return (
-//     <Fragment>
-//       <WineNav loggedIn={loggedIn}></WineNav>
-//       {routeResult}
-//     </Fragment>
-//   );
-// }
