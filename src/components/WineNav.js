@@ -1,43 +1,41 @@
 import React, { Fragment } from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import { useRoutes, A } from "hookrouter";
-
+import { LinkContainer } from "react-router-bootstrap";
 const WineNav = (props) => {
   return (
     <Fragment>
       <Navbar bg="primary" variant="dark">
-        <A href="/">
+        <LinkContainer exact to="/">
           <Navbar.Brand>Cellr</Navbar.Brand>
-        </A>
+        </LinkContainer>
         <Nav className="mr-auto">
           {props.loggedIn ? (
             <Fragment>
-              <A href="/add-section">
+              <LinkContainer to="/add-section">
                 <Nav.Link>Add Section</Nav.Link>
-              </A>
-              <A href="/add-bottle">
+              </LinkContainer>
+              <LinkContainer to="/add-bottle">
                 <Nav.Link>Add Bottle</Nav.Link>
-              </A>
-              <A href="/filter">
+              </LinkContainer>
+              <LinkContainer to="/filter">
                 <Nav.Link>Filter</Nav.Link>
-              </A>
-              <A href="/all-bottles">
+              </LinkContainer>
+              <LinkContainer to="/all-bottles">
                 <Nav.Link>All Bottles</Nav.Link>
-              </A>
+              </LinkContainer>
             </Fragment>
           ) : null}
         </Nav>
         <Nav>
-          <A href="/log-in">
+          <LinkContainer to="/log-in">
             <Nav.Link>Log In</Nav.Link>
-          </A>
-          <A href="/sign-up">
+          </LinkContainer>
+          <LinkContainer to="/sign-up">
             <Nav.Link>Sign Up</Nav.Link>
-          </A>
+          </LinkContainer>
         </Nav>
       </Navbar>
     </Fragment>
   );
 };
-
 export default WineNav;
