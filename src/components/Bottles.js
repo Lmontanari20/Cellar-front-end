@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
+import { Container } from "react-bootstrap";
 
 const Bottles = () => {
   return (
-    <Fragment>
+    <Container>
       <div>Bottles</div>
-    </Fragment>
+    </Container>
   );
 };
 

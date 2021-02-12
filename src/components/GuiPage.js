@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 import FormContainer from "./FormContainer";
 
-const GuiPage = () => {
+const GuiPage = (props) => {
   return (
     <Fragment>
-      <FormContainer />
+      <FormContainer selectedForm={props.selectedForm} />
       <div>cellarGui</div>
     </Fragment>
   );

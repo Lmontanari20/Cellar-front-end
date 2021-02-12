@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 
 const AddBottle = () => {
-  return <Fragment>blah</Fragment>;
+  return <Fragment>AddBottle</Fragment>;
 };
 
 export default AddBottle;
