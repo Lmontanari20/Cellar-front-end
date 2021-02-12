@@ -16,7 +16,6 @@ export default class App extends Component {
   state = {
     isLoggedIn: false,
     username: null,
-    redirect: null,
   };
 
   logIn = (username) => {

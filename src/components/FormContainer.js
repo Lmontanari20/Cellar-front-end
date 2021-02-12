@@ -17,7 +17,7 @@ const FormContainer = (props) => {
     }
   };
 
-  return <Container>{currentForm()}</Container>;
+  return <Container className="mt-4">{currentForm()}</Container>;
 };
 
 export default FormContainer;
