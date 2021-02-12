@@ -2,12 +2,13 @@ import { Container, Form, Row, Col, Button } from "react-bootstrap";
 
 // this.props.formType == "log-in" || "sign-up"
 
-const handleSubmit = (e) => {
-  console.log(e.target.username.value);
-  this.props.logIn(e.target.username.value);
-};
-
 const LogInContainer = (props) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target.username.value);
+    props.logIn(e.target.username.value);
+  };
+
   return (
     <Container className="mt-4">
       <Row className="justify-content-md-center">

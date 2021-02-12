@@ -5,13 +5,18 @@ import WineNav from "./components/WineNav";
 import GuiPage from "./components/GuiPage";
 import Bottles from "./components/Bottles";
 import LogInContainer from "./components/LogInContainer";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 
 export default class App extends Component {
   state = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     username: null,
+    redirect: null,
   };
 
   logIn = (username) => {
@@ -61,18 +66,20 @@ export default class App extends Component {
               component={() => <GuiPage selectedForm="filter" />}
             />
             <Route path="/all-bottles" component={Bottles} />
-            <Route
-              path="/log-in"
-              component={() => (
+            <Route path="/log-in">
+              {this.state.isLoggedIn ? (
+                <Redirect to="/" />
+              ) : (
                 <LogInContainer formType="log-in" logIn={this.logIn} />
               )}
-            />
-            <Route
-              path="/sign-up"
-              component={() => (
+            </Route>
+            <Route path="/sign-up">
+              {this.state.isLoggedIn ? (
+                <Redirect to="/" />
+              ) : (
                 <LogInContainer formType="sign-up" logIn={this.signUp} />
               )}
-            />
+            </Route>
           </Switch>
         </Router>
       </Fragment>
