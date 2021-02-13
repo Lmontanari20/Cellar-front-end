@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import "react-grid-layout/css/styles.css";
 import WineNav from "./components/WineNav";
 import GuiPage from "./components/GuiPage";
 import Bottles from "./components/Bottles";
