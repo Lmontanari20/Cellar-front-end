@@ -42,6 +42,8 @@ const AddBottle = () => {
     return types.map((type) => <option>{type}</option>);
   };
 
+  // tooltips on the form might be cool
+  // maybe Formik for validation and handling input values
   return (
     <Fragment>
       <Form>
@@ -58,6 +60,11 @@ const AddBottle = () => {
                 type="text"
                 placeholder="Enter Winery"
               ></Form.Control>
+              <Form.Label className="mt-2">Section</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Section Name"
+              ></Form.Control>
             </Form.Group>
           </Col>
           <Col>
@@ -71,9 +78,25 @@ const AddBottle = () => {
                 max={2021}
                 min={300}
               ></NumericInput>
+              <Form.Row className="mt-2">
+                <Col>
+                  <Form.Label>Row Number</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="X Coordinate"
+                  ></Form.Control>
+                </Col>
+                <Col>
+                  <Form.Label>Column Number</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Y Coordinate"
+                  ></Form.Control>
+                </Col>
+              </Form.Row>
             </Form.Group>
           </Col>
-          <Col>
+          <Col className="butt-col">
             <Form.Group>
               <Form.Label>Size</Form.Label>
               <Form.Control as="select">{sizeOptions()}</Form.Control>
@@ -86,13 +109,11 @@ const AddBottle = () => {
                 decimalsLimit={2}
               ></CurrencyInput>
             </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="justify-content-end" style={{ textAlign: "right" }}>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+            <div className="mt-4 butt-div" style={{ textAlign: "right" }}>
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </div>
           </Col>
         </Row>
       </Form>
