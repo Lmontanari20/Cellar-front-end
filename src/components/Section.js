@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import Cell from "./Cell";
 
 class Section extends Component {
   state = {};
@@ -8,10 +9,10 @@ class Section extends Component {
   }
 
   // h: 1 => 24px
-  // h: 2 => 70px
-  // h: 3 => 110px
-  // h: 4 => 150px
-  // h: 5 => 190px
+  // h: 2 => 70px  -24= 46
+  // h: 3 => 110px -24= 86
+  // h: 4 => 150px -24= 126
+  // h: 5 => 190px -24=
 
   // w: 1 => 89px
   // w: 2 => 188px (+99)
@@ -24,10 +25,38 @@ class Section extends Component {
 
   // can we set height+width of cell as a ratio of the size of the section?
 
+  renderCells = () => {
+    let arr = [];
+    for (let index = 0; index < this.props.width; index++) {
+      arr.push(index);
+    }
+
+    return arr.map((i) => {
+      return <Cell key={i} />;
+    });
+  };
+
+  renderRows = () => {
+    let arr = [];
+    for (let index = 0; index < this.props.height; index++) {
+      arr.push(index);
+    }
+
+    return arr.map((i) => {
+      return (
+        <div className="bottle-row" key={i}>
+          {this.renderCells()}
+        </div>
+      );
+    });
+  };
+
   render() {
     return (
       <Fragment>
         <div>{this.props.sectionName}</div>
+        {/* <div className="bottle-row">{this.renderCells()}</div> */}
+        {this.renderRows()}
       </Fragment>
     );
   }
