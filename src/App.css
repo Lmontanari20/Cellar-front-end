@@ -13,3 +13,23 @@
   display: flex;
   height: 24px;
 }
+
+.purple {
+  color: white;
+  background-color: rgb(58, 1, 33);
+}
+
+.btn-primary {
+  background-color: rgb(82, 4, 48) !important;
+  border-color: rgb(82, 4, 48) !important;
+}
+
+.form-div {
+  padding-top: 1rem;
+  /* background-color: rgb(206, 164, 110);
+  border-bottom: 2px solid rgb(100, 54, 11); */
+}
+/* 
+.gui-div {
+  border: 12px inset rgb(121, 54, 0);
+} */

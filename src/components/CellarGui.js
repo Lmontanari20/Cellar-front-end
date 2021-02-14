@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import GridLayout from "react-grid-layout";
 import Section from "./Section";
 
@@ -98,7 +98,7 @@ class CellarGui extends Component {
     // actually... entire layout could be state, where static is toggled
     // on rearrange cellar button click.
     return (
-      <Fragment>
+      <div className="gui-div">
         {this.state.sections ? (
           <GridLayout
             className="layout"
@@ -116,7 +116,7 @@ class CellarGui extends Component {
         <div key="c">c</div> */}
           </GridLayout>
         ) : null}
-      </Fragment>
+      </div>
     );
   }
 }

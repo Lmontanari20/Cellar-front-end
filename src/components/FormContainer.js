@@ -1,3 +1,4 @@
+import React, { Fragment } from "react";
 import { Container } from "react-bootstrap";
 import AddSection from "./cellar-forms/AddSection";
 import AddBottle from "./cellar-forms/AddBottle";
@@ -17,7 +18,15 @@ const FormContainer = (props) => {
     }
   };
 
-  return <Container className="mt-4">{currentForm()}</Container>;
+  return (
+    <Fragment>
+      {props.selectedForm ? (
+        <div className="form-div">
+          <Container>{currentForm()}</Container>
+        </div>
+      ) : null}
+    </Fragment>
+  );
 };
 
 export default FormContainer;
