@@ -56,7 +56,7 @@ class CellarGui extends Component {
         sectionName: section.sectionName,
         x: section.x,
         y: section.y,
-        w: section.w * 0.51,
+        w: section.w * 0.51 - (section.w - 12) * 0.0265,
         actualW: section.w,
         h: 1 + section.h * 0.6,
         actualH: section.h,
