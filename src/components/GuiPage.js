@@ -7,7 +7,7 @@ class GuiPage extends Component {
     sections: [
       { id: "1", sectionName: "Section1", x: 0, y: 0, w: 5, h: 10 },
       { id: "2", sectionName: "Section2", x: 0, y: 0, w: 8, h: 4 },
-      { id: "3", sectionName: "Section3", x: 0, y: 0, w: 2, h: 2 },
+      { id: "3", sectionName: "Section3", x: 0, y: 0, w: 12, h: 2 },
     ],
   };
 

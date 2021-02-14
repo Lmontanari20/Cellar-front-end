@@ -56,15 +56,12 @@ class CellarGui extends Component {
         sectionName: section.sectionName,
         x: section.x,
         y: section.y,
-        w: section.w * 0.255,
-        minW: section.w * 0.255,
-        maxW: section.w * 0.255,
+        w: section.w * 0.51,
         actualW: section.w,
         h: 1 + section.h * 0.6,
-        minH: 1 + section.h * 0.6,
-        maxH: 1 + section.h * 0.6,
         actualH: section.h,
         static: false,
+        isResizable: false,
       };
     });
     this.setState({
@@ -87,6 +84,10 @@ class CellarGui extends Component {
       );
     });
   };
+
+  handleMove = (layout) => {
+    console.log(layout);
+  };
   render() {
     // each div below is a section component
     // each section component will have many
@@ -102,9 +103,10 @@ class CellarGui extends Component {
           <GridLayout
             className="layout"
             layout={this.state.sections}
-            cols={12}
+            cols={24}
             rowHeight={30}
             width={1200}
+            onLayoutChange={(layout) => this.handleMove(layout)}
           >
             {this.sections()}
             {/* <div key="a">
