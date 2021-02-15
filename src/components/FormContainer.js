@@ -8,7 +8,7 @@ const FormContainer = (props) => {
   const currentForm = () => {
     switch (props.selectedForm) {
       case "sections":
-        return <Sections />;
+        return <Sections toggleStatic={props.toggleStatic} />;
       case "add-bottle":
         return <AddBottle />;
       case "filter":

@@ -49,6 +49,20 @@ class CellarGui extends Component {
     // ],
   };
 
+  componentDidUpdate(previousProps) {
+    if (previousProps.static !== this.props.static) {
+      console.log(this.props.static);
+      const sections = this.state.sections.map((section) => {
+        let arrangeableSection = Object.assign({}, section);
+        arrangeableSection.static = this.props.static;
+        return arrangeableSection;
+      });
+      this.setState({
+        sections: sections,
+      });
+    }
+  }
+
   componentDidMount() {
     const sections = this.props.sections.map((section) => {
       return {
@@ -61,7 +75,7 @@ class CellarGui extends Component {
         actualW: section.w,
         h: 1 + section.h * 0.6,
         actualH: section.h,
-        static: false,
+        static: this.props.static,
         isResizable: false,
       };
     });

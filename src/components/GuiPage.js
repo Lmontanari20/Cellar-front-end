@@ -4,6 +4,7 @@ import CellarGui from "./CellarGui";
 
 class GuiPage extends Component {
   state = {
+    static: true,
     sections: [
       {
         id: "1",
@@ -86,6 +87,14 @@ class GuiPage extends Component {
   //       static: false,
   //     },
 
+  toggleStatic = () => {
+    this.setState((prevState) => {
+      return {
+        static: !prevState.static,
+      };
+    });
+  };
+
   componentDidMount() {
     // fetch user.sections
     // pass section data as prop to CellarGui
@@ -94,8 +103,15 @@ class GuiPage extends Component {
   render() {
     return (
       <Fragment>
-        <FormContainer selectedForm={this.props.selectedForm} />
-        <CellarGui sections={this.state.sections} />
+        <FormContainer
+          selectedForm={this.props.selectedForm}
+          toggleStatic={
+            this.props.selectedForm === "sections"
+              ? this.toggleStatic
+              : undefined
+          }
+        />
+        <CellarGui sections={this.state.sections} static={this.state.static} />
       </Fragment>
     );
   }
