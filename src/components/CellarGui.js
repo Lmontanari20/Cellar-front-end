@@ -54,6 +54,7 @@ class CellarGui extends Component {
       return {
         i: section.id,
         sectionName: section.sectionName,
+        bottles: section.bottles,
         x: section.x,
         y: section.y,
         w: section.w * 0.51 - (section.w - 12) * 0.0265,
@@ -79,6 +80,7 @@ class CellarGui extends Component {
             sectionName={section.sectionName}
             width={section.actualW}
             height={section.actualH}
+            bottles={section.bottles}
           />
         </div>
       );
@@ -97,6 +99,9 @@ class CellarGui extends Component {
     // coord states need to be persisted, maybe on save button click?
     // actually... entire layout could be state, where static is toggled
     // on rearrange cellar button click.
+
+    // be sure to "unbound" vertical GridLayout size when dragging
+    // Grid Items
     return (
       <div className="gui-div">
         {this.state.sections ? (

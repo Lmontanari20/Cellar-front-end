@@ -1,5 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Duru+Sans&display=swap");
+
+body {
+  font-family: "Duru Sans", sans-serif !important;
+  background-color: rgb(250, 220, 182) !important;
+}
+
 .react-grid-item {
   border-style: solid;
+  border-color: rgb(94, 27, 0);
+  background-color: tan;
 }
 
 .bottle-cell {
@@ -7,6 +16,8 @@
   width: 24px;
   border-style: solid;
   border-width: 1px;
+  border-color: rgb(92, 26, 0);
+  background-color: rgba(167, 70, 0, 0.25);
 }
 
 .bottle-row {
@@ -26,10 +37,9 @@
 
 .form-div {
   padding-top: 1rem;
-  /* background-color: rgb(206, 164, 110);
-  border-bottom: 2px solid rgb(100, 54, 11); */
+  border-bottom: 2px, solid, gray;
 }
-/* 
-.gui-div {
-  border: 12px inset rgb(121, 54, 0);
-} */
+
+.section-head {
+  text-align: center;
+}
