@@ -43,3 +43,13 @@ body {
 .section-head {
   text-align: center;
 }
+
+.react-bootstrap-table .table-bordered td {
+  border: 1px solid black;
+  text-overflow: clip;
+  overflow: hidden;
+}
+
+.react-bootstrap-table .table-bordered th {
+  border: 1px solid black;
+}

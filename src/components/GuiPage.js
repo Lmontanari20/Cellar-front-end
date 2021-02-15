@@ -5,7 +5,34 @@ import CellarGui from "./CellarGui";
 class GuiPage extends Component {
   state = {
     sections: [
-      { id: "1", sectionName: "Section1", x: 0, y: 0, w: 20, h: 1 },
+      {
+        id: "1",
+        sectionName: "Section1",
+        x: 0,
+        y: 0,
+        w: 20,
+        h: 1,
+        bottles: [
+          {
+            id: 1,
+            type: "red",
+            x: 1,
+            y: 1,
+          },
+          {
+            id: 2,
+            type: "rose",
+            x: 2,
+            y: 1,
+          },
+          {
+            id: 3,
+            type: "white",
+            x: 3,
+            y: 1,
+          },
+        ],
+      },
       {
         id: "2",
         sectionName: "Section2",

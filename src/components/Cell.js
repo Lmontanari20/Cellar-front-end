@@ -17,7 +17,7 @@ class Cell extends Component {
         <div className="bottle-cell">
           <img
             src={process.env.PUBLIC_URL + `/bottle-${this.bottleType()}.png`}
-            alt=""
+            alt={`${this.bottleType()} wine`}
           />
         </div>
       </Fragment>
