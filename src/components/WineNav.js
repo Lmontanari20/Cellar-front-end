@@ -12,8 +12,8 @@ const WineNav = (props) => {
         <Nav className="mr-auto">
           {props.loggedIn ? (
             <Fragment>
-              <LinkContainer to="/add-section">
-                <Nav.Link>Add Section</Nav.Link>
+              <LinkContainer to="/sections">
+                <Nav.Link>Sections</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/add-bottle">
                 <Nav.Link>Add Bottle</Nav.Link>

@@ -65,8 +65,8 @@ export default class App extends Component {
               )}
             />
             <Route
-              path="/add-section"
-              component={() => <GuiPage selectedForm="add-section" />}
+              path="/sections"
+              component={() => <GuiPage selectedForm="sections" />}
             />
             <Route
               path="/add-bottle"

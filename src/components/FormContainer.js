@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
 import { Container } from "react-bootstrap";
-import AddSection from "./cellar-forms/AddSection";
+import Sections from "./cellar-forms/Sections";
 import AddBottle from "./cellar-forms/AddBottle";
 import Filter from "./cellar-forms/Filter";
 
 const FormContainer = (props) => {
   const currentForm = () => {
     switch (props.selectedForm) {
-      case "add-section":
-        return <AddSection />;
+      case "sections":
+        return <Sections />;
       case "add-bottle":
         return <AddBottle />;
       case "filter":
