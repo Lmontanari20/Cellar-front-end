@@ -99,13 +99,11 @@ class GuiPage extends Component {
   };
 
   handleMove = (layout) => {
-    console.log(layout);
     let currentSection;
     const newPositions = layout.map((section) => {
       currentSection = this.state.sections.find((s) => s.id === section.i);
       currentSection.x = section.x;
       currentSection.y = section.y;
-      console.log(currentSection);
       return currentSection;
     });
     this.setState({

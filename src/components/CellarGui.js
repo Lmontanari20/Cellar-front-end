@@ -51,7 +51,6 @@ class CellarGui extends Component {
 
   componentDidUpdate(previousProps) {
     if (previousProps.static !== this.props.static) {
-      console.log(this.props.static);
       const sections = this.state.sections.map((section) => {
         let arrangeableSection = Object.assign({}, section);
         arrangeableSection.static = this.props.static;
