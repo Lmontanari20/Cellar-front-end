@@ -61,9 +61,12 @@ class CellarGui extends Component {
         sections: sections,
       });
     }
+    if (previousProps.sections !== this.props.sections) {
+      this.setSections();
+    }
   }
 
-  componentDidMount() {
+  setSections = () => {
     const sections = this.props.sections.map((section) => {
       return {
         i: section.id,
@@ -82,9 +85,11 @@ class CellarGui extends Component {
     this.setState({
       sections: sections,
     });
-  }
+  };
 
-  // look into 'onLayoutChange' func from documentation to persist layouts
+  componentDidMount() {
+    this.setSections();
+  }
 
   sections = () => {
     return this.state.sections.map((section) => {
@@ -92,6 +97,7 @@ class CellarGui extends Component {
         <div key={section.i}>
           <Section
             sectionName={section.sectionName}
+            key={section.sectionName}
             width={section.actualW}
             height={section.actualH}
             bottles={section.bottles}
@@ -101,19 +107,7 @@ class CellarGui extends Component {
     });
   };
 
-  handleMove = (layout) => {
-    console.log(layout);
-  };
   render() {
-    // each div below is a section component
-    // each section component will have many
-    // cell components
-    //
-    // x and y coords on sections will need to be states
-    // coord states need to be persisted, maybe on save button click?
-    // actually... entire layout could be state, where static is toggled
-    // on rearrange cellar button click.
-
     // be sure to "unbound" vertical GridLayout size when dragging
     // Grid Items
     return (
@@ -125,14 +119,9 @@ class CellarGui extends Component {
             cols={24}
             rowHeight={30}
             width={1200}
-            onLayoutChange={(layout) => this.handleMove(layout)}
+            onLayoutChange={(layout) => this.props.handleMove(layout)}
           >
             {this.sections()}
-            {/* <div key="a">
-          <Section />
-        </div>
-        <div key="b">b</div>
-        <div key="c">c</div> */}
           </GridLayout>
         ) : null}
       </div>

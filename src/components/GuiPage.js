@@ -38,7 +38,7 @@ class GuiPage extends Component {
         id: "2",
         sectionName: "Section2",
         x: 0,
-        y: 0,
+        y: 1.6,
         w: 8,
         h: 12,
         bottles: [
@@ -62,10 +62,10 @@ class GuiPage extends Component {
           },
         ],
       },
-      { id: "3", sectionName: "Section3", x: 0, y: 0, w: 8, h: 12 },
-      { id: "4", sectionName: "Section4", x: 0, y: 0, w: 12, h: 4 },
-      { id: "5", sectionName: "Section5", x: 0, y: 0, w: 13, h: 5 },
-      { id: "6", sectionName: "Section6", x: 0, y: 0, w: 25, h: 6 },
+      { id: "3", sectionName: "Section3", x: 5, y: 1.6, w: 8, h: 12 },
+      // { id: "4", sectionName: "Section4", x: 0, y: 100, w: 8, h: 12 },
+      // when user creates new section, x should be 0, and y should be
+      // equal to the maximum y+h of the sections
     ],
   };
 
@@ -88,10 +88,28 @@ class GuiPage extends Component {
   //     },
 
   toggleStatic = () => {
+    // if toggle back to static = true,
+    // update sections x and y coords with last updated positions
+    // pass function from GuiPage down to CellarGui to call inside
     this.setState((prevState) => {
       return {
         static: !prevState.static,
       };
+    });
+  };
+
+  handleMove = (layout) => {
+    console.log(layout);
+    let currentSection;
+    const newPositions = layout.map((section) => {
+      currentSection = this.state.sections.find((s) => s.id === section.i);
+      currentSection.x = section.x;
+      currentSection.y = section.y;
+      console.log(currentSection);
+      return currentSection;
+    });
+    this.setState({
+      sections: newPositions,
     });
   };
 
@@ -111,7 +129,11 @@ class GuiPage extends Component {
               : undefined
           }
         />
-        <CellarGui sections={this.state.sections} static={this.state.static} />
+        <CellarGui
+          sections={this.state.sections}
+          static={this.state.static}
+          handleMove={this.handleMove}
+        />
       </Fragment>
     );
   }

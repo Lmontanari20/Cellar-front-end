@@ -24,7 +24,7 @@ const AddBottle = () => {
       "Primat/Goliath (27 L)",
       "Melchizedek/Midas (30 L)",
     ];
-    return sizes.map((size) => <option>{size}</option>);
+    return sizes.map((size) => <option key={size}>{size}</option>);
   };
 
   const typeOptions = () => {
@@ -39,7 +39,7 @@ const AddBottle = () => {
       "Syrah",
       "Zinfandel",
     ];
-    return types.map((type) => <option>{type}</option>);
+    return types.map((type) => <option key={type}>{type}</option>);
   };
 
   // tooltips on the form might be cool

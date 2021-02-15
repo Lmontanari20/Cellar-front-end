@@ -57,7 +57,11 @@ class Section extends Component {
     let rowNum = 0;
     return arr.map((i) => {
       rowNum = this.props.height - i;
-      return <div className="bottle-row">{this.renderCells(rowNum)}</div>;
+      return (
+        <div className="bottle-row" key={`${this.props.sectionName}-${rowNum}`}>
+          {this.renderCells(rowNum)}
+        </div>
+      );
     });
   };
 
