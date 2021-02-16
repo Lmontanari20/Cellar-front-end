@@ -5,15 +5,15 @@ import { LinkContainer } from "react-router-bootstrap";
 const WineNav = (props) => {
   return (
     <Fragment>
-      <Navbar bg="primary" variant="dark">
+      <Navbar className="purple" variant="dark">
         <LinkContainer exact to="/">
           <Navbar.Brand>Cellr</Navbar.Brand>
         </LinkContainer>
         <Nav className="mr-auto">
           {props.loggedIn ? (
             <Fragment>
-              <LinkContainer to="/add-section">
-                <Nav.Link>Add Section</Nav.Link>
+              <LinkContainer to="/sections">
+                <Nav.Link>Sections</Nav.Link>
               </LinkContainer>
               <LinkContainer to="/add-bottle">
                 <Nav.Link>Add Bottle</Nav.Link>
