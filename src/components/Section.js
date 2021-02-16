@@ -4,9 +4,9 @@ import Cell from "./Cell";
 class Section extends Component {
   state = {};
 
-  componentDidMount() {
-    // console.log(this.props);
-  }
+  // componentDidMount() {
+  //   // console.log(this.props);
+  // }
 
   // h: 1 => 24px
   // h: 2 => 70px  -24= 46

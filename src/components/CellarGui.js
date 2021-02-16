@@ -13,60 +13,8 @@ import Section from "./Section";
 // static is true to start, toggled off by toggle rearrange
 
 class CellarGui extends Component {
-  state = {
-    sections: null,
-    // sections: [
-    //   {
-    //     i: "1",
-    //     sectionName: "section1",
-    //     x: 0,
-    //     y: 0,
-    //     w: 10 * 0.255,
-    //     h: 1 + 5 * 0.6,
-    //     minW: 10 * 0.255,
-    //     maxW: 10 * 0.255,
-    //     actualW: 10,
-    //     maxH: 1 + 5 * 0.6,
-    //     minH: 1 + 5 * 0.6,
-    //     actualH: 5,
-    //     static: false,
-    //   },
-    //   {
-    //     i: "2",
-    //     sectionName: "section2",
-    //     x: 0,
-    //     y: 0,
-    //     w: 10 * 0.255,
-    //     h: 1 + 2 * 0.6,
-    //     minW: 10 * 0.255,
-    //     maxW: 10 * 0.255,
-    //     actualW: 10,
-    //     maxH: 1 + 2 * 0.6,
-    //     minH: 1 + 2 * 0.6,
-    //     actualH: 2,
-    //     static: false,
-    //   },
-    // ],
-  };
-
-  componentDidUpdate(previousProps) {
-    if (previousProps.static !== this.props.static) {
-      const sections = this.state.sections.map((section) => {
-        let arrangeableSection = Object.assign({}, section);
-        arrangeableSection.static = this.props.static;
-        return arrangeableSection;
-      });
-      this.setState({
-        sections: sections,
-      });
-    }
-    if (previousProps.sections !== this.props.sections) {
-      this.setSections();
-    }
-  }
-
-  setSections = () => {
-    const sections = this.props.sections.map((section) => {
+  sectionsToGrid = () => {
+    return this.props.sections.map((section) => {
       return {
         i: section.id,
         sectionName: section.sectionName,
@@ -81,24 +29,17 @@ class CellarGui extends Component {
         isResizable: false,
       };
     });
-    this.setState({
-      sections: sections,
-    });
   };
 
-  componentDidMount() {
-    this.setSections();
-  }
-
   sections = () => {
-    return this.state.sections.map((section) => {
+    return this.props.sections.map((section) => {
       return (
-        <div key={section.i}>
+        <div key={section.id}>
           <Section
             sectionName={section.sectionName}
             key={section.sectionName}
-            width={section.actualW}
-            height={section.actualH}
+            width={section.w}
+            height={section.h}
             bottles={section.bottles}
           />
         </div>
@@ -109,12 +50,14 @@ class CellarGui extends Component {
   render() {
     // be sure to "unbound" vertical GridLayout size when dragging
     // Grid Items
+    let layoutArray = this.sectionsToGrid();
+    console.log(layoutArray);
     return (
       <div className="gui-div">
-        {this.state.sections ? (
+        {this.props.sections ? (
           <GridLayout
             className="layout"
-            layout={this.state.sections}
+            layout={layoutArray}
             cols={24}
             rowHeight={30}
             width={1200}
