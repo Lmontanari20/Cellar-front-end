@@ -6,6 +6,9 @@ import "react-grid-layout/css/styles.css";
 import WineNav from "./components/WineNav";
 import GuiPage from "./components/GuiPage";
 import Bottles from "./components/Bottles";
+import Sections from "./components/cellar-forms/Sections.js";
+import Filter from "./components/cellar-forms/Filter.js";
+import CellarGui from "./components/CellarGui.js";
 import LogInContainer from "./components/LogInContainer";
 import {
   BrowserRouter as Router,
@@ -14,6 +17,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { getSuggestedQuery } from "@testing-library/react";
+import AddBottle from "./components/cellar-forms/AddBottle";
 
 export default class App extends Component {
   state = {
@@ -176,37 +180,12 @@ export default class App extends Component {
           </header>
           <Switch>
             <Route exact path="/" />
-            {/* <Route
+            <Route
               path="/sections"
-              component={() => (
-                <GuiPage
-                  sections={this.state.sections}
-                  static={this.state.static}
-                  handleMove={this.handleMove}
-                  selectedForm="sections"
-                />
-              )}
+              component={() => <Sections toggleStatic={this.toggleStatic} />}
             />
-            <Route
-              path="/add-bottle"
-              component={() => (
-                <GuiPage
-                  sections={this.state.sections}
-                  static={this.state.static}
-                  selectedForm="add-bottle"
-                />
-              )}
-            />
-            <Route
-              path="/filter"
-              component={() => (
-                <GuiPage
-                  sections={this.state.sections}
-                  static={this.state.static}
-                  selectedForm="filter"
-                />
-              )}
-            /> */}
+            <Route path="/add-bottle" component={() => <AddBottle />} />
+            <Route path="/filter" component={() => <Filter />} />
             <Route path="/all-bottles" component={Bottles} />
             <Route path="/log-in">
               {this.state.isLoggedIn ? (
@@ -224,13 +203,10 @@ export default class App extends Component {
             </Route>
           </Switch>
         </Router>
-        <GuiPage
+        <CellarGui
           sections={this.state.sections}
           static={this.state.static}
-          toggleStatic={this.toggleStatic}
           handleMove={this.handleMove}
-          selectedForm={"sections"}
-          loggedIn={this.state.isLoggedIn}
         />
       </Fragment>
     );
