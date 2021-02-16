@@ -48,16 +48,13 @@ class CellarGui extends Component {
   };
 
   render() {
-    // be sure to "unbound" vertical GridLayout size when dragging
-    // Grid Items
-    let layoutArray = this.sectionsToGrid();
-    console.log(layoutArray);
+    // be sure to "unbound" vertical GridLayout size when dragging grid items
     return (
       <div className="gui-div">
         {this.props.sections ? (
           <GridLayout
             className="layout"
-            layout={layoutArray}
+            layout={this.sectionsToGrid()}
             cols={24}
             rowHeight={30}
             width={1200}
