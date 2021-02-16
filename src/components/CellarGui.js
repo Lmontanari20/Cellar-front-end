@@ -16,7 +16,7 @@ class CellarGui extends Component {
   sectionsToGrid = () => {
     return this.props.sections.map((section) => {
       return {
-        i: section.id,
+        i: `${section.id}`,
         sectionName: section.sectionName,
         bottles: section.bottles,
         x: section.x,
