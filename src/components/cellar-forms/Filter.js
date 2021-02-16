@@ -1,7 +1,11 @@
-import React, { Fragment } from "react";
+import { Container } from "react-bootstrap";
 
 const Filter = () => {
-  return <Fragment>Filter</Fragment>;
+  return (
+    <div className="form-div">
+      <Container>Filter</Container>
+    </div>
+  );
 };
 
 export default Filter;

@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import "react-grid-layout/css/styles.css";
 import WineNav from "./components/WineNav";
-import GuiPage from "./components/GuiPage";
 import Bottles from "./components/Bottles";
 import Sections from "./components/cellar-forms/Sections.js";
 import Filter from "./components/cellar-forms/Filter.js";
@@ -16,7 +15,6 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import { getSuggestedQuery } from "@testing-library/react";
 import AddBottle from "./components/cellar-forms/AddBottle";
 
 export default class App extends Component {
@@ -200,12 +198,10 @@ export default class App extends Component {
       currentSection.y = section.y;
       return currentSection;
     });
-    if (newPositions !== this.state.sections) {
-      console.log(newPositions, this.state.sections);
-      this.setState({
-        sections: newPositions,
-      });
-    }
+
+    this.setState({
+      sections: newPositions,
+    });
   };
 
   render() {
