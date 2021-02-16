@@ -158,12 +158,10 @@ export default class App extends Component {
       currentSection.y = section.y;
       return currentSection;
     });
-    if (newPositions !== this.state.sections) {
-      console.log(newPositions, this.state.sections);
-      this.setState({
-        sections: newPositions,
-      });
-    }
+
+    this.setState({
+      sections: newPositions,
+    });
   };
 
   render() {
