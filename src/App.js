@@ -137,6 +137,46 @@ export default class App extends Component {
     });
   };
 
+  // fetch methods
+  handleBottleSubmit = (wine, bottle) => {
+    fetch("http://localhost:3000/wines", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json",
+      },
+      body: JSON.stringify(wine),
+    })
+      .then((res) => res.json())
+      .then((wine) => {
+        this.fetchBottle(wine, bottle);
+      });
+  };
+
+  fetchBottle = (wine, bottle) => {
+    let newBottle = bottle;
+    debugger;
+    newBottle.section_id = parseInt(
+      this.state.sections.find((section) => {
+        return section.sectionName === bottle.section;
+      }).id
+    );
+    delete newBottle.section;
+    console.log(newBottle);
+    console.log(wine);
+    newBottle.wine_id = wine.id;
+    fetch("http://localhost:3000/bottles", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json",
+      },
+      body: JSON.stringify(bottle),
+    })
+      .then((res) => res.json())
+      .then((bottle) => console.log(bottle, wine));
+  };
+
   // Gui Methods
 
   toggleStatic = () => {
@@ -180,7 +220,12 @@ export default class App extends Component {
               path="/sections"
               component={() => <Sections toggleStatic={this.toggleStatic} />}
             />
-            <Route path="/add-bottle" component={() => <AddBottle />} />
+            <Route
+              path="/add-bottle"
+              component={() => (
+                <AddBottle bottleSubmit={this.handleBottleSubmit} />
+              )}
+            />
             <Route path="/filter" component={() => <Filter />} />
             <Route path="/all-bottles" component={Bottles} />
             <Route path="/log-in">
