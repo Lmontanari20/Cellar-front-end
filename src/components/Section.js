@@ -2,11 +2,9 @@ import React, { Component, Fragment } from "react";
 import Cell from "./Cell";
 
 class Section extends Component {
-  state = {};
-
-  // componentDidMount() {
-  //   // console.log(this.props);
-  // }
+  state = {
+    cellCSS: false,
+  };
 
   // h: 1 => 24px
   // h: 2 => 70px  -24= 46
@@ -45,7 +43,13 @@ class Section extends Component {
       x = i + 1;
       cellKey = `${this.props.name}-${x}x-${y}y`;
       let foundBottle = this.findBottle(x, y);
-      return <Cell key={cellKey} bottle={foundBottle} />;
+      return (
+        <Cell
+          key={cellKey}
+          bottle={foundBottle}
+          filteredBottles={this.props.filteredBottles}
+        />
+      );
     });
   };
 

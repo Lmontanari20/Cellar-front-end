@@ -41,6 +41,7 @@ class CellarGui extends Component {
             width={section.columns}
             height={section.rows}
             bottles={section.bottles}
+            filteredBottles={this.props.filteredBottles}
           />
         </div>
       );

@@ -25,6 +25,11 @@ export default class App extends Component {
     cellarId: null,
     static: true,
     sections: null,
+    filteredBottles: null,
+  };
+
+  resetFilteredBottles = () => {
+    this.setState({ filteredBottles: null });
   };
 
   //fetch calls
@@ -81,6 +86,10 @@ export default class App extends Component {
       isLoggedIn: false,
       username: null,
     });
+  };
+
+  setFilteredBottles = (filteredBottles) => {
+    this.setState({ filteredBottles: filteredBottles });
   };
 
   // fetch methods
@@ -174,6 +183,8 @@ export default class App extends Component {
               path="/sections"
               component={() => (
                 <Sections
+                  filteredBottles={this.state.filteredBottles}
+                  resetFilteredBottles={this.resetFilteredBottles}
                   toggleStatic={this.toggleStatic}
                   static={this.state.static}
                   sections={this.state.sections}
@@ -189,7 +200,15 @@ export default class App extends Component {
                 <AddBottle bottleSubmit={this.handleBottleSubmit} />
               )}
             />
-            <Route path="/filter" component={() => <Filter />} />
+            <Route
+              path="/filter"
+              component={() => (
+                <Filter
+                  setFilteredBottles={this.setFilteredBottles}
+                  sections={this.state.sections}
+                />
+              )}
+            />
             <Route
               path="/all-bottles"
               component={() => <Bottles userId={this.state.userId} />}
@@ -214,6 +233,7 @@ export default class App extends Component {
           sections={this.state.sections}
           static={this.state.static}
           handleMove={this.handleMove}
+          filteredBottles={this.state.filteredBottles}
         />
       </Fragment>
     );

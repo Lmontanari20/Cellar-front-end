@@ -26,10 +26,21 @@ class Cell extends Component {
     return (
       <Fragment>
         <div className="bottle-cell">
-          <img
-            src={process.env.PUBLIC_URL + `/bottle-${this.bottleType()}.png`}
-            alt={`${this.bottleType()} wine`}
-          />
+          {this.props.filteredBottles &&
+          this.props.filteredBottles.find(
+            (bottle) => bottle === this.props.bottle
+          ) ? (
+            <img
+              style={{ backgroundColor: "#7936f5" }}
+              src={process.env.PUBLIC_URL + `/bottle-${this.bottleType()}.png`}
+              alt={`${this.bottleType()} wine`}
+            />
+          ) : (
+            <img
+              src={process.env.PUBLIC_URL + `/bottle-${this.bottleType()}.png`}
+              alt={`${this.bottleType()} wine`}
+            />
+          )}
         </div>
       </Fragment>
     );

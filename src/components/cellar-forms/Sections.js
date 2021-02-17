@@ -1,6 +1,7 @@
 import { Form, Row, Col, Button, Container } from "react-bootstrap";
 
 const Sections = (props) => {
+  props.filteredBottles && props.resetFilteredBottles();
   const newY = () => {
     if (props.sections) {
       return (
