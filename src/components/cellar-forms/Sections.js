@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
 
 const Sections = (props) => {
+  props.filteredBottles && props.resetFilteredBottles();
   return (
     <div className="form-div">
       <Container>

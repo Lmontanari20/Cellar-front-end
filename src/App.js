@@ -24,49 +24,11 @@ export default class App extends Component {
     userId: null,
     static: true,
     sections: null,
-    sections: [
-      {
-        id: 1,
-        name: "",
-        x: 0,
-        y: 0,
-        w: 1,
-        h: 1,
-        bottles: [],
-      },
-      // {
-      //   id: "2",
-      //   name: "Section2",
-      //   x: 0,
-      //   y: 1.6,
-      //   w: 8,
-      //   h: 12,
-      //   bottles: [
-      //     {
-      //       id: 1,
-      //       type: "red",
-      //       x: 3,
-      //       y: 3,
-      //     },
-      //     {
-      //       id: 2,
-      //       type: "rose",
-      //       x: 3,
-      //       y: 4,
-      //     },
-      //     {
-      //       id: 3,
-      //       type: "white",
-      //       x: 5,
-      //       y: 6,
-      //     },
-      //   ],
-      // },
-      // { id: "3", name: "Section3", x: 5, y: 1.6, w: 8, h: 12 },
-      // { id: "4", name: "Section4", x: 0, y: 100, w: 8, h: 12 },
-      // when user creates new section, x should be 0, and y should be
-      // equal to the maximum y+h of the sections
-    ],
+    filteredBottles: null,
+  };
+
+  resetFilteredBottles = () => {
+    this.setState({ filteredBottles: null });
   };
 
   //fetch calls
@@ -121,6 +83,10 @@ export default class App extends Component {
       isLoggedIn: false,
       username: null,
     });
+  };
+
+  setFilteredBottles = (filteredBottles) => {
+    this.setState({ filteredBottles: filteredBottles });
   };
 
   // fetch methods
@@ -212,7 +178,13 @@ export default class App extends Component {
             <Route exact path="/" />
             <Route
               path="/sections"
-              component={() => <Sections toggleStatic={this.toggleStatic} />}
+              component={() => (
+                <Sections
+                  filteredBottles={this.state.filteredBottles}
+                  resetFilteredBottles={this.resetFilteredBottles}
+                  toggleStatic={this.toggleStatic}
+                />
+              )}
             />
             <Route
               path="/add-bottle"
@@ -220,7 +192,15 @@ export default class App extends Component {
                 <AddBottle bottleSubmit={this.handleBottleSubmit} />
               )}
             />
-            <Route path="/filter" component={() => <Filter />} />
+            <Route
+              path="/filter"
+              component={() => (
+                <Filter
+                  setFilteredBottles={this.setFilteredBottles}
+                  sections={this.state.sections}
+                />
+              )}
+            />
             <Route
               path="/all-bottles"
               component={() => <Bottles userId={this.state.userId} />}
@@ -245,6 +225,7 @@ export default class App extends Component {
           sections={this.state.sections}
           static={this.state.static}
           handleMove={this.handleMove}
+          filteredBottles={this.state.filteredBottles}
         />
       </Fragment>
     );
