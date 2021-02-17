@@ -21,69 +21,9 @@ export default class App extends Component {
   state = {
     isLoggedIn: false,
     username: null,
+    userId: null,
     static: true,
-    sections: [
-      {
-        id: "1",
-        name: "Section1",
-        x: 0,
-        y: 0,
-        w: 20,
-        h: 1,
-        bottles: [
-          {
-            id: 1,
-            type: "red",
-            x: 1,
-            y: 1,
-          },
-          {
-            id: 2,
-            type: "rose",
-            x: 2,
-            y: 1,
-          },
-          {
-            id: 3,
-            type: "white",
-            x: 3,
-            y: 1,
-          },
-        ],
-      },
-      {
-        id: "2",
-        name: "Section2",
-        x: 0,
-        y: 1.6,
-        w: 8,
-        h: 12,
-        bottles: [
-          {
-            id: 1,
-            type: "red",
-            x: 3,
-            y: 3,
-          },
-          {
-            id: 2,
-            type: "rose",
-            x: 3,
-            y: 4,
-          },
-          {
-            id: 3,
-            type: "white",
-            x: 5,
-            y: 6,
-          },
-        ],
-      },
-      { id: "3", name: "Section3", x: 5, y: 1.6, w: 8, h: 12 },
-      // { id: "4", name: "Section4", x: 0, y: 100, w: 8, h: 12 },
-      // when user creates new section, x should be 0, and y should be
-      // equal to the maximum y+h of the sections
-    ],
+    sections: null,
   };
 
   //fetch calls
@@ -100,7 +40,9 @@ export default class App extends Component {
         this.setState({
           isLoggedIn: true,
           username: user.username,
+          userId: user.id,
         });
+        this.fetchUserSections(user.id);
       });
   };
 
@@ -124,6 +66,7 @@ export default class App extends Component {
         this.setState({
           isLoggedIn: true,
           username: username,
+          userId: user.id,
         });
       });
   };
@@ -177,6 +120,14 @@ export default class App extends Component {
       .then((bottle) => console.log(bottle, wine));
   };
 
+  fetchUserSections = (id) => {
+    fetch(`http://localhost:3000/sections/${id}`)
+      .then((res) => res.json())
+      .then((sections) => {
+        this.setState({ sections: sections });
+      });
+  };
+
   // Gui Methods
 
   toggleStatic = () => {
@@ -193,7 +144,7 @@ export default class App extends Component {
   handleMove = (layout) => {
     let currentSection;
     const newPositions = layout.map((section) => {
-      currentSection = this.state.sections.find((s) => s.id === section.i);
+      currentSection = this.state.sections.find((s) => `${s.id}` === section.i);
       currentSection.x = section.x;
       currentSection.y = section.y;
       return currentSection;
@@ -227,7 +178,10 @@ export default class App extends Component {
               )}
             />
             <Route path="/filter" component={() => <Filter />} />
-            <Route path="/all-bottles" component={Bottles} />
+            <Route
+              path="/all-bottles"
+              component={() => <Bottles userId={this.state.userId} />}
+            />
             <Route path="/log-in">
               {this.state.isLoggedIn ? (
                 <Redirect to="/" />

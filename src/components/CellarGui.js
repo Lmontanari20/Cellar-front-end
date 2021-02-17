@@ -16,15 +16,15 @@ class CellarGui extends Component {
   sectionsToGrid = () => {
     return this.props.sections.map((section) => {
       return {
-        i: section.id,
+        i: `${section.id}`,
         name: section.name,
         bottles: section.bottles,
         x: section.x,
         y: section.y,
-        w: section.w * 0.51 - (section.w - 12) * 0.0265,
-        actualW: section.w,
-        h: 1 + section.h * 0.6,
-        actualH: section.h,
+        w: section.columns * 0.51 - (section.columns - 12) * 0.0265,
+        actualW: section.columns,
+        h: 1 + section.rows * 0.6,
+        actualH: section.rows,
         static: this.props.static,
         isResizable: false,
       };
@@ -38,8 +38,8 @@ class CellarGui extends Component {
           <Section
             name={section.name}
             key={section.name}
-            width={section.w}
-            height={section.h}
+            width={section.columns}
+            height={section.rows}
             bottles={section.bottles}
           />
         </div>

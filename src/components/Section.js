@@ -28,7 +28,7 @@ class Section extends Component {
   findBottle = (x, y) => {
     if (this.props.bottles) {
       return this.props.bottles.find(
-        (bottle) => bottle.x === x && bottle.y === y
+        (bottle) => bottle.column === x && bottle.row === y
       );
     }
   };
