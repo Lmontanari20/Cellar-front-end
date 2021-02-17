@@ -25,7 +25,7 @@ export default class App extends Component {
     sections: [
       {
         id: "1",
-        sectionName: "Section1",
+        name: "Section1",
         x: 0,
         y: 0,
         w: 20,
@@ -53,7 +53,7 @@ export default class App extends Component {
       },
       {
         id: "2",
-        sectionName: "Section2",
+        name: "Section2",
         x: 0,
         y: 1.6,
         w: 8,
@@ -79,8 +79,8 @@ export default class App extends Component {
           },
         ],
       },
-      { id: "3", sectionName: "Section3", x: 5, y: 1.6, w: 8, h: 12 },
-      // { id: "4", sectionName: "Section4", x: 0, y: 100, w: 8, h: 12 },
+      { id: "3", name: "Section3", x: 5, y: 1.6, w: 8, h: 12 },
+      // { id: "4", name: "Section4", x: 0, y: 100, w: 8, h: 12 },
       // when user creates new section, x should be 0, and y should be
       // equal to the maximum y+h of the sections
     ],
@@ -158,7 +158,7 @@ export default class App extends Component {
     debugger;
     newBottle.section_id = parseInt(
       this.state.sections.find((section) => {
-        return section.sectionName === bottle.section;
+        return section.name === bottle.section;
       }).id
     );
     delete newBottle.section;

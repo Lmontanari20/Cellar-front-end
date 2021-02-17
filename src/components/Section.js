@@ -43,7 +43,7 @@ class Section extends Component {
 
     return arr.map((i) => {
       x = i + 1;
-      cellKey = `${this.props.sectionName}-${x}x-${y}y`;
+      cellKey = `${this.props.name}-${x}x-${y}y`;
       let foundBottle = this.findBottle(x, y);
       return <Cell key={cellKey} bottle={foundBottle} />;
     });
@@ -58,7 +58,7 @@ class Section extends Component {
     return arr.map((i) => {
       rowNum = this.props.height - i;
       return (
-        <div className="bottle-row" key={`${this.props.sectionName}-${rowNum}`}>
+        <div className="bottle-row" key={`${this.props.name}-${rowNum}`}>
           {this.renderCells(rowNum)}
         </div>
       );
@@ -68,7 +68,7 @@ class Section extends Component {
   render() {
     return (
       <Fragment>
-        <div className="section-head">{this.props.sectionName}</div>
+        <div className="section-head">{this.props.name}</div>
         {/* <div className="bottle-row">{this.renderCells()}</div> */}
         {this.renderRows()}
       </Fragment>

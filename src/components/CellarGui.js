@@ -17,7 +17,7 @@ class CellarGui extends Component {
     return this.props.sections.map((section) => {
       return {
         i: section.id,
-        sectionName: section.sectionName,
+        name: section.name,
         bottles: section.bottles,
         x: section.x,
         y: section.y,
@@ -36,8 +36,8 @@ class CellarGui extends Component {
       return (
         <div key={section.id}>
           <Section
-            sectionName={section.sectionName}
-            key={section.sectionName}
+            name={section.name}
+            key={section.name}
             width={section.w}
             height={section.h}
             bottles={section.bottles}
