@@ -2,10 +2,21 @@ import React, { Component, Fragment } from "react";
 
 class Cell extends Component {
   state = {};
+  bottleColors = {
+    "Cabernet Sauvignon": "red",
+    "Cabernet Franc": "red",
+    "Malbec": "red",
+    "Grenache": "red",
+    "Syrah": "red",
+    "Mourvedre": "red",
+    "Merlot": "red",
+    "Syrah": "red",
+    "Zinfandel": "red",
+  };
 
   bottleType = () => {
     if (this.props.bottle) {
-      return this.props.bottle.type;
+      return this.bottleColors[this.props.bottle.wine.wineType];
     } else {
       return "empty";
     }
