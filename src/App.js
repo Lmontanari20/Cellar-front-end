@@ -22,6 +22,7 @@ export default class App extends Component {
     isLoggedIn: false,
     username: null,
     userId: null,
+    cellarId: null,
     static: true,
     sections: null,
   };
@@ -41,6 +42,7 @@ export default class App extends Component {
           isLoggedIn: true,
           username: user.username,
           userId: user.id,
+          cellarId: user.cellars[0].id,
         });
         this.fetchUserSections(user.id);
       });
@@ -67,6 +69,7 @@ export default class App extends Component {
           isLoggedIn: true,
           username: username,
           userId: user.id,
+          cellarId: user.cellars[0].id,
         });
       });
   };
@@ -169,7 +172,16 @@ export default class App extends Component {
             <Route exact path="/" />
             <Route
               path="/sections"
-              component={() => <Sections toggleStatic={this.toggleStatic} />}
+              component={() => (
+                <Sections
+                  toggleStatic={this.toggleStatic}
+                  static={this.state.static}
+                  sections={this.state.sections}
+                  userId={this.state.userId}
+                  cellarId={this.state.cellarId}
+                  updateSectionsState={this.fetchUserSections}
+                />
+              )}
             />
             <Route
               path="/add-bottle"
