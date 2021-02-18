@@ -16,7 +16,6 @@ export default class Filter extends React.Component {
       "Syrah",
       "Mourvedre",
       "Merlot",
-      "Syrah",
       "Zinfandel",
     ];
     return types.map((type) => <option key={type}>{type}</option>);

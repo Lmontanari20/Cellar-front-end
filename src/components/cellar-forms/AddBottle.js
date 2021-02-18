@@ -1,4 +1,3 @@
-import React, { Fragment } from "react";
 import { Form, Row, Col, Button, Container } from "react-bootstrap";
 import NumericInput from "react-numeric-input";
 import CurrencyInput from "react-currency-input-field";
@@ -36,7 +35,6 @@ const AddBottle = (props) => {
       "Syrah",
       "Mourvedre",
       "Merlot",
-      "Syrah",
       "Zinfandel",
     ];
     return types.map((type) => <option key={type}>{type}</option>);
@@ -147,7 +145,6 @@ const AddBottle = (props) => {
                   placeholder="$12.34"
                   prefix="$"
                   decimalsLimit={2}
-                  name="price"
                 ></CurrencyInput>
               </Form.Group>
               <div className="mt-4 butt-div" style={{ textAlign: "right" }}>
