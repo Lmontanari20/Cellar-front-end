@@ -5,7 +5,7 @@ const Sections = (props) => {
   const newY = () => {
     if (props.sections) {
       return (
-        0.1 +
+        1 +
         Math.max(...props.sections.map((section) => section.y + section.rows))
       );
     } else {

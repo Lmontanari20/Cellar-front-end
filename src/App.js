@@ -110,7 +110,6 @@ export default class App extends Component {
 
   fetchBottle = (wine, bottle) => {
     let newBottle = bottle;
-    debugger;
     newBottle.section_id = parseInt(
       this.state.sections.find((section) => {
         return section.name === bottle.section;
