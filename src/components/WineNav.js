@@ -13,16 +13,24 @@ const WineNav = (props) => {
           {props.loggedIn ? (
             <Fragment>
               <LinkContainer to="/sections">
-                <Nav.Link>Sections</Nav.Link>
+                <Nav.Link onClick={() => props.toggleHidden(false)}>
+                  Sections
+                </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/add-bottle">
-                <Nav.Link>Add Bottle</Nav.Link>
+              <LinkContainer to="/bottle">
+                <Nav.Link onClick={() => props.toggleHidden(false)}>
+                  Bottle
+                </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/filter">
-                <Nav.Link>Filter</Nav.Link>
+                <Nav.Link onClick={() => props.toggleHidden(false)}>
+                  Filter
+                </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/all-bottles">
-                <Nav.Link>All Bottles</Nav.Link>
+                <Nav.Link onClick={() => props.toggleHidden(true)}>
+                  All Bottles
+                </Nav.Link>
               </LinkContainer>
             </Fragment>
           ) : null}

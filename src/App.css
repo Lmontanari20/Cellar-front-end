@@ -35,6 +35,11 @@ body {
   border-color: rgb(82, 4, 48) !important;
 }
 
+.btn-danger {
+  background-color: rgb(255, 115, 0) !important;
+  border-color: rgb(255, 115, 0) !important;
+}
+
 .form-div {
   padding-top: 1rem;
   border-bottom: 2px, solid, gray;
@@ -52,4 +57,12 @@ body {
 
 .react-bootstrap-table .table-bordered th {
   border: 1px solid black;
+}
+
+.gui-div-hidden {
+  display: none;
+}
+
+.selected {
+  background-color: chartreuse !important;
 }

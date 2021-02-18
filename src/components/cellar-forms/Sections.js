@@ -4,9 +4,8 @@ const Sections = (props) => {
   props.filteredBottles && props.resetFilteredBottles();
   const newY = () => {
     if (props.sections) {
-      return (
-        1 +
-        Math.max(...props.sections.map((section) => section.y + section.rows))
+      return Math.max(
+        ...props.sections.map((section) => section.y + (1 + 0.6 * section.rows))
       );
     } else {
       return 0;
@@ -16,7 +15,6 @@ const Sections = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const yVal = newY();
-    console.log("y-val", yVal);
     const section = {
       name: e.target.name.value,
       cellar_id: props.cellarId,
@@ -47,6 +45,7 @@ const Sections = (props) => {
   return (
     <div className="form-div">
       <Container>
+        <h2>Add Section</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Row>
             <Col xs={3}>

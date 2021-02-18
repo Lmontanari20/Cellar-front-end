@@ -15,7 +15,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import AddBottle from "./components/cellar-forms/AddBottle";
+import Bottle from "./components/cellar-forms/Bottle";
 
 export default class App extends Component {
   state = {
@@ -26,6 +26,9 @@ export default class App extends Component {
     static: true,
     sections: null,
     filteredBottles: null,
+    guiHidden: true,
+    selectedCell: null,
+    selectedBottle: null,
   };
 
   resetFilteredBottles = () => {
@@ -48,6 +51,7 @@ export default class App extends Component {
           username: user.username,
           userId: user.id,
           cellarId: user.cellars[0].id,
+          guiHidden: false,
         });
         this.fetchUserSections(user.id);
       });
@@ -85,6 +89,12 @@ export default class App extends Component {
     this.setState({
       isLoggedIn: false,
       username: null,
+      userId: null,
+      cellarId: null,
+      static: true,
+      sections: null,
+      filteredBottles: null,
+      guiHidden: true,
     });
   };
 
@@ -109,6 +119,7 @@ export default class App extends Component {
   };
 
   fetchBottle = (wine, bottle) => {
+    this.setState({ selectedCell: null, selectedBottle: null });
     let newBottle = bottle;
     newBottle.section_id = parseInt(
       this.state.sections.find((section) => {
@@ -116,8 +127,6 @@ export default class App extends Component {
       }).id
     );
     delete newBottle.section;
-    console.log(newBottle);
-    console.log(wine);
     newBottle.wine_id = wine.id;
     fetch("http://localhost:3000/bottles", {
       method: "POST",
@@ -128,7 +137,7 @@ export default class App extends Component {
       body: JSON.stringify(bottle),
     })
       .then((res) => res.json())
-      .then((bottle) => console.log(bottle, wine));
+      .then(() => this.fetchUserSections(this.state.userId));
   };
 
   fetchUserSections = (id) => {
@@ -139,17 +148,56 @@ export default class App extends Component {
       });
   };
 
+  patchCoordinates = () => {
+    const sectionCoordinates = this.state.sections.map((section) => {
+      return {
+        id: section.id,
+        x: section.x,
+        y: section.y,
+      };
+    });
+    fetch(`http://localhost:3000/sections/${this.state.cellarId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+        "Accepts": "application/json",
+      },
+      body: JSON.stringify({
+        sections: sectionCoordinates,
+      }),
+    })
+      .then((res) => res.json)
+      .then(() => this.fetchUserSections(this.state.cellarId));
+  };
+
   // Gui Methods
+  handleCellSelect = (cell, bottle, deselect = null) => {
+    if (!this.state.static) {
+      return;
+    }
+    if (deselect) {
+      this.setState({ selectedCell: null, selectedBottle: null });
+    } else {
+      this.setState({
+        selectedCell: cell,
+        selectedBottle: bottle,
+      });
+    }
+  };
+
+  toggleHidden = (bool) => {
+    this.setState({
+      guiHidden: bool,
+    });
+  };
 
   toggleStatic = () => {
-    // if toggle back to static = true,
-    // update sections x and y coords with last updated positions
-    // pass function from GuiPage down to CellarGui to call inside
     this.setState((prevState) => {
       return {
         static: !prevState.static,
       };
     });
+    !this.state.static && this.patchCoordinates();
   };
 
   handleMove = (layout) => {
@@ -174,6 +222,7 @@ export default class App extends Component {
             <WineNav
               loggedIn={this.state.isLoggedIn}
               handleLogOut={this.logOut}
+              toggleHidden={this.toggleHidden}
             />
           </header>
           <Switch>
@@ -194,9 +243,14 @@ export default class App extends Component {
               )}
             />
             <Route
-              path="/add-bottle"
+              path="/bottle"
               component={() => (
-                <AddBottle bottleSubmit={this.handleBottleSubmit} />
+                <Bottle
+                  bottleSubmit={this.handleBottleSubmit}
+                  sections={this.state.sections}
+                  selectedCell={this.state.selectedCell}
+                  selectedBottle={this.state.selectedBottle}
+                />
               )}
             />
             <Route
@@ -210,7 +264,9 @@ export default class App extends Component {
             />
             <Route
               path="/all-bottles"
-              component={() => <Bottles userId={this.state.userId} />}
+              component={() => (
+                <Bottles userId={this.state.userId} selectedCell />
+              )}
             />
             <Route path="/log-in">
               {this.state.isLoggedIn ? (
@@ -233,6 +289,9 @@ export default class App extends Component {
           static={this.state.static}
           handleMove={this.handleMove}
           filteredBottles={this.state.filteredBottles}
+          hidden={this.state.guiHidden}
+          handleCellSelect={this.handleCellSelect}
+          selectedCell={this.state.selectedCell}
         />
       </Fragment>
     );

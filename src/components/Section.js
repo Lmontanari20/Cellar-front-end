@@ -38,16 +38,21 @@ class Section extends Component {
     }
     let cellKey = "";
     let x = 0;
+    let cellAttributes = null;
 
     return arr.map((i) => {
       x = i + 1;
       cellKey = `${this.props.name}-${x}x-${y}y`;
+      cellAttributes = { [this.props.name]: [x, y] };
       let foundBottle = this.findBottle(x, y);
       return (
         <Cell
           key={cellKey}
           bottle={foundBottle}
           filteredBottles={this.props.filteredBottles}
+          handleCellSelect={this.props.handleCellSelect}
+          selectedCell={this.props.selectedCell}
+          cellAttributes={cellAttributes}
         />
       );
     });
