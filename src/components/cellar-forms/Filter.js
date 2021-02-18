@@ -61,18 +61,18 @@ export default class Filter extends React.Component {
             filteredBottles.push(bottle);
         });
       }
-      if (e.target.type.value !== "") {
+      if (e.target.filterType.checked) {
         this.props.sections[i].bottles.forEach((bottle) => {
           bottle.wine.wineType === e.target.type.value &&
             filteredBottles.push(bottle);
         });
       }
-      if (e.target.size.value !== "") {
+      if (e.target.filterSize.checked) {
         this.props.sections[i].bottles.forEach((bottle) => {
           bottle.size === e.target.size.value && filteredBottles.push(bottle);
         });
       }
-      if (e.target.year.value !== "") {
+      if (e.target.filterYear.checked) {
         this.props.sections[i].bottles.forEach((bottle) => {
           bottle.wine.year === parseInt(e.target.year.value) &&
             filteredBottles.push(bottle);
@@ -110,7 +110,7 @@ export default class Filter extends React.Component {
             </Col>
             <Col>
               <Form.Group>
-                <Form.Label>Type</Form.Label>
+                <Form.Check name="filterType" inline label="Filter Type" />
                 <Form.Control name="type" as="select">
                   {this.selectOptions()}
                 </Form.Control>
@@ -120,7 +120,7 @@ export default class Filter extends React.Component {
           <Row className="mt-2">
             <Col>
               <Form.Group>
-                <Form.Label>Size</Form.Label>
+                <Form.Check inline name="filterSize" label="Filter Size" />
                 <Form.Control name="size" as="select">
                   {this.sizeOptions()}
                 </Form.Control>
@@ -128,7 +128,7 @@ export default class Filter extends React.Component {
             </Col>
             <Col>
               <Form.Group>
-                <Form.Label>Year</Form.Label>
+                <Form.Check inline name="filterYear" label="Filter Year" />
                 <NumericInput
                   className="form-control"
                   value={2016}
