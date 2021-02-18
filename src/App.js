@@ -119,6 +119,7 @@ export default class App extends Component {
   };
 
   fetchBottle = (wine, bottle) => {
+    this.setState({ selectedCell: null, selectedBottle: null });
     let newBottle = bottle;
     newBottle.section_id = parseInt(
       this.state.sections.find((section) => {

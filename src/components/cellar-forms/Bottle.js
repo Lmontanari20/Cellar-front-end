@@ -22,8 +22,8 @@ class Bottle extends Component {
   componentDidMount() {
     if (this.props.selectedCell) {
       if (this.props.selectedBottle) {
+        // Selected cell has a bottle
         this.setState({
-          formType: "Edit Bottle",
           name: this.props.selectedBottle.wine.name,
           winery: this.props.selectedBottle.wine.winery,
           section: Object.keys(this.props.selectedCell)[0],
@@ -33,6 +33,21 @@ class Bottle extends Component {
           column: `${this.props.selectedBottle.column}`,
           size: this.props.selectedBottle.size,
           price: this.props.selectedBottle.price,
+          formType: "Edit Bottle",
+        });
+      } else {
+        // Selected cell is empty
+        this.setState({
+          name: "",
+          winery: "",
+          section: `${Object.keys(this.props.selectedCell)[0]}`,
+          type: Object.keys(WineTypes)[0],
+          year: 2016,
+          row: `${Object.values(this.props.selectedCell)[0][1]}`,
+          column: `${Object.values(this.props.selectedCell)[0][0]}`,
+          size: Object.keys(WineSizes)[0],
+          price: "",
+          formType: "Add Bottle",
         });
       }
     }
@@ -113,8 +128,8 @@ class Bottle extends Component {
         <Container>
           <h2>{this.state.formType}</h2>
           <Form onSubmit={this.handleSubmit}>
-            <Row>
-              <Col>
+            <Form.Row>
+              <Col xs={4}>
                 <Form.Group>
                   <Form.Label>Name</Form.Label>
                   <Form.Control
@@ -132,18 +147,9 @@ class Bottle extends Component {
                     value={this.state.winery}
                     onChange={this.handleChange}
                   ></Form.Control>
-                  <Form.Label className="mt-2">Section</Form.Label>
-                  <Form.Control
-                    as="select"
-                    name="section"
-                    value={this.state.section}
-                    onChange={this.handleChange}
-                  >
-                    {this.sections()}
-                  </Form.Control>
                 </Form.Group>
               </Col>
-              <Col>
+              <Col xs={4}>
                 <Form.Group>
                   <Form.Label>Type</Form.Label>
                   <Form.Control
@@ -163,31 +169,9 @@ class Bottle extends Component {
                     name="year"
                     onChange={(e) => this.handleChange(e, "year")}
                   ></NumericInput>
-                  <Form.Row className="mt-2">
-                    <Col>
-                      <Form.Label>Column Number</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="X Coordinate"
-                        name="column"
-                        value={this.state.column}
-                        onChange={this.handleChange}
-                      ></Form.Control>
-                    </Col>
-                    <Col>
-                      <Form.Label>Row Number</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Y Coordinate"
-                        name="row"
-                        value={this.state.row}
-                        onChange={this.handleChange}
-                      ></Form.Control>
-                    </Col>
-                  </Form.Row>
                 </Form.Group>
               </Col>
-              <Col className="butt-col">
+              <Col xs={4} className="butt-col">
                 <Form.Group>
                   <Form.Label>Size</Form.Label>
                   <Form.Control
@@ -209,13 +193,59 @@ class Bottle extends Component {
                     onValueChange={(e) => this.handleChange(e, "price")}
                   ></CurrencyInput>
                 </Form.Group>
-                <div className="mt-4 butt-div" style={{ textAlign: "right" }}>
-                  <Button variant="primary" type="submit">
-                    Submit
-                  </Button>
-                </div>
               </Col>
-            </Row>
+            </Form.Row>
+            <Form.Row>
+              <Col xs={4}>
+                <Form.Label>Section</Form.Label>
+              </Col>
+              <Col xs={2}>
+                <Form.Label>Column Number</Form.Label>
+              </Col>
+              <Col xs={2}>
+                <Form.Label>Row Number</Form.Label>
+              </Col>
+            </Form.Row>
+            <Form.Row>
+              <Col xs={4}>
+                <Form.Control
+                  as="select"
+                  name="section"
+                  value={this.state.section}
+                  onChange={this.handleChange}
+                >
+                  {this.sections()}
+                </Form.Control>
+              </Col>
+              <Col xs={2}>
+                <Form.Control
+                  type="text"
+                  placeholder="X Coordinate"
+                  name="column"
+                  value={this.state.column}
+                  onChange={this.handleChange}
+                ></Form.Control>
+              </Col>
+              <Col xs={2}>
+                <Form.Control
+                  type="text"
+                  placeholder="Y Coordinate"
+                  name="row"
+                  value={this.state.row}
+                  onChange={this.handleChange}
+                ></Form.Control>
+              </Col>
+              <Col xs={2}>
+                <Button variant="primary" type="submit">
+                  {this.state.formType}
+                </Button>
+              </Col>
+              {this.state.formType === "Edit Bottle" ? (
+                <Col xs={2} style={{ textAlign: "right" }}>
+                  <Button variant="danger">Drink Bottle</Button>
+                </Col>
+              ) : null}
+            </Form.Row>
           </Form>
         </Container>
       </div>

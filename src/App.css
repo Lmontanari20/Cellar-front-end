@@ -35,6 +35,11 @@ body {
   border-color: rgb(82, 4, 48) !important;
 }
 
+.btn-danger {
+  background-color: rgb(255, 115, 0) !important;
+  border-color: rgb(255, 115, 0) !important;
+}
+
 .form-div {
   padding-top: 1rem;
   border-bottom: 2px, solid, gray;
