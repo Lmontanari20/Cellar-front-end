@@ -4,7 +4,7 @@ import CurrencyInput from "react-currency-input-field";
 import WineTypes from "../../WineTypes";
 import WineSizes from "../../WineSizes";
 
-const AddBottle = (props) => {
+const Bottle = (props) => {
   const sizeOptions = () => {
     const sizes = Object.keys(WineSizes);
     return sizes.map((size) => <option key={size}>{size}</option>);
@@ -135,4 +135,4 @@ const AddBottle = (props) => {
   );
 };
 
-export default AddBottle;
+export default Bottle;

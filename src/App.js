@@ -15,7 +15,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import AddBottle from "./components/cellar-forms/AddBottle";
+import Bottle from "./components/cellar-forms/Bottle";
 
 export default class App extends Component {
   state = {
@@ -226,9 +226,9 @@ export default class App extends Component {
               )}
             />
             <Route
-              path="/add-bottle"
+              path="/bottle"
               component={() => (
-                <AddBottle
+                <Bottle
                   bottleSubmit={this.handleBottleSubmit}
                   sections={this.state.sections}
                 />

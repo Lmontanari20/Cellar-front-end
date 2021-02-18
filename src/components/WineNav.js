@@ -17,9 +17,9 @@ const WineNav = (props) => {
                   Sections
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/add-bottle">
+              <LinkContainer to="/bottle">
                 <Nav.Link onClick={() => props.toggleHidden(false)}>
-                  Add Bottle
+                  Bottle
                 </Nav.Link>
               </LinkContainer>
               <LinkContainer to="/filter">
