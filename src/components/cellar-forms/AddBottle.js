@@ -1,42 +1,17 @@
 import { Form, Row, Col, Button, Container } from "react-bootstrap";
 import NumericInput from "react-numeric-input";
 import CurrencyInput from "react-currency-input-field";
+import WineTypes from "../../WineTypes";
+import WineSizes from "../../WineSizes";
 
 const AddBottle = (props) => {
   const sizeOptions = () => {
-    const sizes = [
-      "Standard (750ml)",
-      "Split/Piccolo (187.5ml)",
-      "Half/Demi (375 ml)",
-      "Half-liter/Jennie (500ml)",
-      "Liter (1000ml)",
-      "Magnum (1.5 L)",
-      "Double Magnum (3 L)",
-      "Rehoboam (Jeroboam in Bordeaux) (4.5 L)",
-      "Methuselah or Imperial (Bordeaux) (6 L)",
-      "Salmanazar (9 L)",
-      "Balthazar (12 L)",
-      "Nebuchadnezzar (15 L)",
-      "Melchior (18 L)",
-      "Solomon (20 L)",
-      "Sovereign (26 L)",
-      "Primat/Goliath (27 L)",
-      "Melchizedek/Midas (30 L)",
-    ];
+    const sizes = Object.keys(WineSizes);
     return sizes.map((size) => <option key={size}>{size}</option>);
   };
 
   const typeOptions = () => {
-    const types = [
-      "Cabernet Sauvignon",
-      "Cabernet Franc",
-      "Malbec",
-      "Grenache",
-      "Syrah",
-      "Mourvedre",
-      "Merlot",
-      "Zinfandel",
-    ];
+    const types = Object.keys(WineTypes);
     return types.map((type) => <option key={type}>{type}</option>);
   };
 

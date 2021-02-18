@@ -20,7 +20,6 @@ const Sections = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const yVal = newY();
-    console.log("y-val", yVal);
     const section = {
       name: e.target.name.value,
       cellar_id: props.cellarId,
