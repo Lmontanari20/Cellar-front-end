@@ -43,6 +43,8 @@ class CellarGui extends Component {
             height={section.rows}
             bottles={section.bottles}
             filteredBottles={this.props.filteredBottles}
+            handleCellSelect={this.props.handleCellSelect}
+            selectedCell={this.props.selectedCell}
           />
         </div>
       );

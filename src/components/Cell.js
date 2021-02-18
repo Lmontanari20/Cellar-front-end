@@ -12,9 +12,43 @@ class Cell extends Component {
     }
   };
 
+  handleCellSelect = () => {
+    if (this.isCellSelected()) {
+      this.props.handleCellSelect(
+        this.props.cellAttributes,
+        this.props.bottle,
+        true
+      );
+    } else {
+      this.props.handleCellSelect(this.props.cellAttributes, this.props.bottle);
+    }
+  };
+
+  // cellAttributes = { [this.props.name]: [x, y] }
+
+  isCellSelected = () => {
+    if (this.props.selectedCell) {
+      return (
+        Object.keys(this.props.selectedCell)[0] ===
+          Object.keys(this.props.cellAttributes)[0] &&
+        Object.values(this.props.selectedCell)[0][0] ===
+          Object.values(this.props.cellAttributes)[0][0] &&
+        Object.values(this.props.selectedCell)[0][1] ===
+          Object.values(this.props.cellAttributes)[0][1]
+      );
+    } else {
+      return null;
+    }
+  };
+
   render() {
     return (
-      <div className="bottle-cell">
+      <div
+        className={
+          this.isCellSelected() ? "bottle-cell selected" : "bottle-cell"
+        }
+        onClick={this.handleCellSelect}
+      >
         {this.props.filteredBottles &&
         this.props.filteredBottles.find(
           (bottle) => bottle === this.props.bottle

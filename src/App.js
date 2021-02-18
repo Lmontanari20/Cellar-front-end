@@ -27,6 +27,8 @@ export default class App extends Component {
     sections: null,
     filteredBottles: null,
     guiHidden: true,
+    selectedCell: null,
+    selectedBottle: null,
   };
 
   resetFilteredBottles = () => {
@@ -168,6 +170,20 @@ export default class App extends Component {
   };
 
   // Gui Methods
+  handleCellSelect = (cell, bottle, deselect = null) => {
+    if (!this.state.static) {
+      return;
+    }
+    if (deselect) {
+      this.setState({ selectedCell: null, selectedBottle: null });
+    } else {
+      this.setState({
+        selectedCell: cell,
+        selectedBottle: bottle,
+      });
+    }
+  };
+
   toggleHidden = (bool) => {
     this.setState({
       guiHidden: bool,
@@ -231,6 +247,8 @@ export default class App extends Component {
                 <Bottle
                   bottleSubmit={this.handleBottleSubmit}
                   sections={this.state.sections}
+                  selectedCell={this.state.selectedCell}
+                  selectedBottle={this.state.selectedBottle}
                 />
               )}
             />
@@ -245,7 +263,9 @@ export default class App extends Component {
             />
             <Route
               path="/all-bottles"
-              component={() => <Bottles userId={this.state.userId} />}
+              component={() => (
+                <Bottles userId={this.state.userId} selectedCell />
+              )}
             />
             <Route path="/log-in">
               {this.state.isLoggedIn ? (
@@ -269,6 +289,8 @@ export default class App extends Component {
           handleMove={this.handleMove}
           filteredBottles={this.state.filteredBottles}
           hidden={this.state.guiHidden}
+          handleCellSelect={this.handleCellSelect}
+          selectedCell={this.state.selectedCell}
         />
       </Fragment>
     );

@@ -57,3 +57,7 @@ body {
 .gui-div-hidden {
   display: none;
 }
+
+.selected {
+  background-color: chartreuse !important;
+}
