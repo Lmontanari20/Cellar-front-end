@@ -42,6 +42,14 @@ const AddBottle = (props) => {
     return types.map((type) => <option key={type}>{type}</option>);
   };
 
+  const sections = () => {
+    if (props.sections) {
+      return props.sections.map((section) => {
+        return <option key={section.name}>{section.name}</option>;
+      });
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -87,11 +95,9 @@ const AddBottle = (props) => {
                   name="winery"
                 ></Form.Control>
                 <Form.Label className="mt-2">Section</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Section Name"
-                  name="section"
-                ></Form.Control>
+                <Form.Control as="select" name="section">
+                  {sections()}
+                </Form.Control>
               </Form.Group>
             </Col>
             <Col>

@@ -53,3 +53,7 @@ body {
 .react-bootstrap-table .table-bordered th {
   border: 1px solid black;
 }
+
+.gui-div-hidden {
+  display: none;
+}

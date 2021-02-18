@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Container } from "react-bootstrap";
 import GridLayout from "react-grid-layout";
 import Section from "./Section";
 
@@ -51,7 +52,10 @@ class CellarGui extends Component {
   render() {
     // be sure to "unbound" vertical GridLayout size when dragging grid items
     return (
-      <div className="gui-div">
+      <Container
+        className={this.props.hidden ? "gui-div-hidden" : "gui-div mt-4"}
+      >
+        <h2>Your Cellar</h2>
         {this.props.sections ? (
           <GridLayout
             className="layout"
@@ -64,7 +68,7 @@ class CellarGui extends Component {
             {this.sections()}
           </GridLayout>
         ) : null}
-      </div>
+      </Container>
     );
   }
 }

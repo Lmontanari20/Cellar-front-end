@@ -5,8 +5,12 @@ const Sections = (props) => {
   const newY = () => {
     if (props.sections) {
       return (
-        0.1 +
-        Math.max(...props.sections.map((section) => section.y + section.rows))
+        1 +
+        Math.max(
+          ...props.sections.map(
+            (section) => section.y + (1 + 0.6 * section.rows)
+          )
+        )
       );
     } else {
       return 0;
@@ -47,6 +51,7 @@ const Sections = (props) => {
   return (
     <div className="form-div">
       <Container>
+        <h2>Add Section</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Row>
             <Col xs={3}>
