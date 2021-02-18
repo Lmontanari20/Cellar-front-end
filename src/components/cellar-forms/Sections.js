@@ -4,13 +4,8 @@ const Sections = (props) => {
   props.filteredBottles && props.resetFilteredBottles();
   const newY = () => {
     if (props.sections) {
-      return (
-        0.1 +
-        Math.max(
-          ...props.sections.map(
-            (section) => section.y + (1 + 0.6 * section.rows)
-          )
-        )
+      return Math.max(
+        ...props.sections.map((section) => section.y + (1 + 0.6 * section.rows))
       );
     } else {
       return 0;
