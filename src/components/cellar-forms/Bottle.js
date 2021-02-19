@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Form, Row, Col, Button, Container } from "react-bootstrap";
+import { Form, Col, Button, Container } from "react-bootstrap";
 import NumericInput from "react-numeric-input";
 import CurrencyInput from "react-currency-input-field";
 import WineTypes from "../../WineTypes";
@@ -50,6 +50,23 @@ class Bottle extends Component {
           formType: "Add Bottle",
         });
       }
+    } else {
+      this.setState({
+        name: "",
+        winery: "",
+        section: this.props.sections
+          ? this.props.selectedSection
+            ? this.props.selectedSection
+            : this.props.sections[0].name
+          : "",
+        type: Object.keys(WineTypes)[0],
+        year: 2016,
+        row: "",
+        column: "",
+        size: Object.keys(WineSizes)[0],
+        price: "",
+        formType: "Add Bottle",
+      });
     }
   }
 
@@ -106,6 +123,19 @@ class Bottle extends Component {
     });
   };
 
+  findBottle = (sectionName, row, column) => {
+    const foundSection = this.props.sections.find(
+      (section) => section.name === sectionName
+    );
+    const foundBottle = foundSection.bottles.find(
+      (bottle) => `${bottle.row}` === row && `${bottle.column}` === column
+    );
+    if (foundBottle) {
+      const cell = { [sectionName]: [parseInt(column), parseInt(row)] };
+      this.props.handleCellSelect(cell, foundBottle);
+    }
+  };
+
   handleChange = (e, field = null) => {
     if (!field) {
       this.setState({
@@ -115,10 +145,28 @@ class Bottle extends Component {
       this.setState({
         year: e,
       });
-    } else {
+    } else if (field === "price") {
       this.setState({
         price: e,
       });
+    } else if (field === "section") {
+      console.log(e.target.name, e.target.value);
+      this.setState({
+        [e.target.name]: e.target.value,
+        column: "",
+        row: "",
+      });
+      this.props.handleCellSelect(null, null, null, e.target.value);
+    } else if (field === "column") {
+      this.setState({
+        [e.target.name]: e.target.value,
+      });
+      this.findBottle(this.state.section, this.state.row, e.target.value);
+    } else if (field === "row") {
+      this.setState({
+        [e.target.name]: e.target.value,
+      });
+      console.log(this.state.section, e.target.value, this.state.column);
     }
   };
 
@@ -212,7 +260,7 @@ class Bottle extends Component {
                   as="select"
                   name="section"
                   value={this.state.section}
-                  onChange={this.handleChange}
+                  onChange={(e) => this.handleChange(e, "section")}
                 >
                   {this.sections()}
                 </Form.Control>
@@ -223,7 +271,7 @@ class Bottle extends Component {
                   placeholder="X Coordinate"
                   name="column"
                   value={this.state.column}
-                  onChange={this.handleChange}
+                  onChange={(e) => this.handleChange(e, "column")}
                 ></Form.Control>
               </Col>
               <Col xs={2}>
@@ -232,7 +280,7 @@ class Bottle extends Component {
                   placeholder="Y Coordinate"
                   name="row"
                   value={this.state.row}
-                  onChange={this.handleChange}
+                  onChange={(e) => this.handleChange(e, "row")}
                 ></Form.Control>
               </Col>
               <Col xs={2}>

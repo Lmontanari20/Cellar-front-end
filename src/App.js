@@ -29,6 +29,7 @@ export default class App extends Component {
     guiHidden: true,
     selectedCell: null,
     selectedBottle: null,
+    selectedSection: null,
   };
 
   resetFilteredBottles = () => {
@@ -171,7 +172,17 @@ export default class App extends Component {
   };
 
   // Gui Methods
-  handleCellSelect = (cell, bottle, deselect = null) => {
+  handleCellSelect = (
+    cell,
+    bottle,
+    deselect = null,
+    selectedSection = null
+  ) => {
+    if (selectedSection) {
+      this.setState({
+        selectedSection: selectedSection,
+      });
+    }
     if (!this.state.static) {
       return;
     }
@@ -250,6 +261,8 @@ export default class App extends Component {
                   sections={this.state.sections}
                   selectedCell={this.state.selectedCell}
                   selectedBottle={this.state.selectedBottle}
+                  handleCellSelect={this.handleCellSelect}
+                  selectedSection={this.state.selectedSection}
                 />
               )}
             />
