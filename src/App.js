@@ -24,6 +24,7 @@ export default class App extends Component {
     userId: null,
     cellarId: null,
     static: true,
+    verticalCompact: true,
     sections: null,
     filteredBottles: null,
     guiHidden: true,
@@ -250,6 +251,14 @@ export default class App extends Component {
     !this.state.static && this.patchCoordinates();
   };
 
+  toggleVerticalCompact = () => {
+    this.setState((prevState) => {
+      return {
+        verticalCompact: !prevState.verticalCompact,
+      };
+    });
+  };
+
   handleMove = (layout) => {
     let currentSection;
     const newPositions = layout.map((section) => {
@@ -284,7 +293,9 @@ export default class App extends Component {
                   filteredBottles={this.state.filteredBottles}
                   resetFilteredBottles={this.resetFilteredBottles}
                   toggleStatic={this.toggleStatic}
+                  toggleVerticalCompact={this.toggleVerticalCompact}
                   static={this.state.static}
+                  verticalCompact={this.state.verticalCompact}
                   sections={this.state.sections}
                   userId={this.state.userId}
                   cellarId={this.state.cellarId}
@@ -341,6 +352,7 @@ export default class App extends Component {
         <CellarGui
           sections={this.state.sections}
           static={this.state.static}
+          verticalCompact={this.state.verticalCompact}
           handleMove={this.handleMove}
           filteredBottles={this.state.filteredBottles}
           hidden={this.state.guiHidden}

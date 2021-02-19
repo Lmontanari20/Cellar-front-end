@@ -59,69 +59,72 @@ export default class Filter extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Form onSubmit={this.handleSubmit}>
-          <Row className="mt-2">
-            <Col>
-              <Form.Group>
-                <Form.Label>Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Wine Name"
-                  name="name"
-                ></Form.Control>
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group>
-                <Form.Label>Winery</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter Winery"
-                  name="winery"
-                ></Form.Control>
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group>
-                <Form.Check name="filterType" inline label="Filter Type" />
-                <Form.Control name="type" as="select">
-                  {this.selectOptions()}
-                </Form.Control>
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row className="mt-2">
-            <Col>
-              <Form.Group>
-                <Form.Check inline name="filterSize" label="Filter Size" />
-                <Form.Control name="size" as="select">
-                  {this.sizeOptions()}
-                </Form.Control>
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group>
-                <Form.Check inline name="filterYear" label="Filter Year" />
-                <NumericInput
-                  className="form-control"
-                  value={2016}
-                  max={2021}
-                  min={300}
-                  name="year"
-                ></NumericInput>
-              </Form.Group>
-            </Col>
-            <Col>
-              <div className="mt-4 butt-div" style={{ textAlign: "right" }}>
-                <Button variant="primary" type="submit">
-                  Submit
-                </Button>
-              </div>
-            </Col>
-          </Row>
-        </Form>
-      </Container>
+      <div className="form-div">
+        <Container>
+          <h2>Filter</h2>
+          <Form onSubmit={this.handleSubmit}>
+            <Row className="mt-2">
+              <Col>
+                <Form.Group>
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Wine Name"
+                    name="name"
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Label>Winery</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter Winery"
+                    name="winery"
+                  ></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Check name="filterType" inline label="Filter Type" />
+                  <Form.Control name="type" as="select">
+                    {this.selectOptions()}
+                  </Form.Control>
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="mt-2">
+              <Col>
+                <Form.Group>
+                  <Form.Check inline name="filterSize" label="Filter Size" />
+                  <Form.Control name="size" as="select">
+                    {this.sizeOptions()}
+                  </Form.Control>
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group>
+                  <Form.Check inline name="filterYear" label="Filter Year" />
+                  <NumericInput
+                    className="form-control"
+                    value={2016}
+                    max={2021}
+                    min={300}
+                    name="year"
+                  ></NumericInput>
+                </Form.Group>
+              </Col>
+              <Col>
+                <div className="mt-4 butt-div" style={{ textAlign: "right" }}>
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </Form>
+        </Container>
+      </div>
     );
   }
 }

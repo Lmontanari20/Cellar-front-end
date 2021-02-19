@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Cellr
 
-## Available Scripts
+The goal of this app is to provide the user with the ability to create a wine cellar graphical display with numerous, rearrangeable sections that can be set up to mimic their actual cellar. Bottles can be added, edited, and removed with bottle graphics updating instantly to reflect the changes in data.
 
-In the project directory, you can run:
+## Prerequisites
 
-### `yarn start`
+You will need a package manager like NPM to install the required packages.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installing Cellr
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+To install, fork this repository as well as the back-end repository. Follow the instructions for the back-end, then in the front-end run npm install. Once the packages have installed, run npm start to start the localhost server.
 
-### `yarn test`
+## Using Cellr
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To use, navigate to the Sections page where you can create as many sections as you need to mimic the layout of your wine cellar. You can click the "toggle static" button to rearrange those sections as you need. Once your sections are set up, navigate to the bottle page where you can add, edit, and delete bottles from the cellar. You can click a cell to select it.
 
-### `yarn build`
+## Contributors
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Thanks to the following people who have contributed to this project:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Lucas Montanari - https://github.com/Lmontanari20
+- Ben Swanson - https://github.com/bswan0002
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Contact
 
-### `yarn eject`
+If you want to contact us, we can be reached at Lmonty2011@gmail.com (Lucas) or bswan0002@gmail.com (Ben).
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## License
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project uses the following license: Learn.co Educational Content License.

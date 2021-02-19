@@ -65,6 +65,7 @@ class CellarGui extends Component {
             cols={24}
             rowHeight={30}
             width={1200}
+            verticalCompact={this.props.verticalCompact}
             onLayoutChange={(layout) => this.props.handleMove(layout)}
           >
             {this.sections()}

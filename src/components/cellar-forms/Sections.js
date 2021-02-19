@@ -74,7 +74,7 @@ const Sections = (props) => {
           </Form.Row>
         </Form>
         <Row className="mt-3">
-          <Col>
+          <Col xs={2}>
             <button
               className={`btn ${
                 props.static ? "btn-primary" : "btn-secondary"
@@ -82,6 +82,16 @@ const Sections = (props) => {
               onClick={props.toggleStatic}
             >
               toggle static
+            </button>
+          </Col>
+          <Col xs={3}>
+            <button
+              className={`btn ${
+                props.verticalCompact ? "btn-primary" : "btn-secondary"
+              }`}
+              onClick={props.toggleVerticalCompact}
+            >
+              toggle vertical compact
             </button>
           </Col>
         </Row>
