@@ -90,8 +90,10 @@ class Bottle extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
-    let price = parseInt(this.state.price.replaceAll(",", ""));
+    let price;
+    typeof this.state.price === "string"
+      ? (price = parseInt(this.state.price.replaceAll(",", "")))
+      : (price = this.state.price);
 
     let wine = {
       name: this.state.name,
@@ -107,8 +109,9 @@ class Bottle extends Component {
       section: this.state.section,
     };
 
-    console.log(wine, bottle);
-    this.props.bottleSubmit(wine, bottle);
+    this.state.formType === "Add Bottle"
+      ? this.props.bottleSubmit(wine, bottle)
+      : this.props.handleEditBottle(wine, bottle, this.props.selectedBottle.id);
 
     this.setState({
       name: "",
@@ -130,10 +133,22 @@ class Bottle extends Component {
     const foundBottle = foundSection.bottles.find(
       (bottle) => `${bottle.row}` === row && `${bottle.column}` === column
     );
-    if (foundBottle) {
-      const cell = { [sectionName]: [parseInt(column), parseInt(row)] };
-      this.props.handleCellSelect(cell, foundBottle);
+    let cell = { [sectionName]: [parseInt(column), parseInt(row)] };
+    if (row !== "" && column !== "") {
+      this.props.handleCellSelect(cell, foundBottle, null, this.state.section);
     }
+  };
+
+  currentSectionWidth = () => {
+    return this.props.sections.find(
+      (section) => section.name === this.state.section
+    ).columns;
+  };
+
+  currentSectionHeight = () => {
+    return this.props.sections.find(
+      (section) => section.name === this.state.section
+    ).rows;
   };
 
   handleChange = (e, field = null) => {
@@ -158,15 +173,22 @@ class Bottle extends Component {
       });
       this.props.handleCellSelect(null, null, null, e.target.value);
     } else if (field === "column") {
-      this.setState({
-        [e.target.name]: e.target.value,
-      });
-      this.findBottle(this.state.section, this.state.row, e.target.value);
+      if (e.target.value >= 0 && e.target.value <= this.currentSectionWidth()) {
+        this.setState({
+          [e.target.name]: e.target.value,
+        });
+        this.findBottle(this.state.section, this.state.row, e.target.value);
+      }
     } else if (field === "row") {
-      this.setState({
-        [e.target.name]: e.target.value,
-      });
-      console.log(this.state.section, e.target.value, this.state.column);
+      if (
+        e.target.value >= 0 &&
+        e.target.value <= this.currentSectionHeight()
+      ) {
+        this.setState({
+          [e.target.name]: e.target.value,
+        });
+        this.findBottle(this.state.section, e.target.value, this.state.column);
+      }
     }
   };
 
@@ -290,7 +312,14 @@ class Bottle extends Component {
               </Col>
               {this.state.formType === "Edit Bottle" ? (
                 <Col xs={2} style={{ textAlign: "right" }}>
-                  <Button variant="danger">Drink Bottle</Button>
+                  <Button
+                    variant="danger"
+                    onClick={() =>
+                      this.props.handleDrink(this.props.selectedBottle.id)
+                    }
+                  >
+                    Drink Bottle
+                  </Button>
                 </Col>
               ) : null}
             </Form.Row>

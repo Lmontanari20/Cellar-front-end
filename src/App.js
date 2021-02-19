@@ -149,6 +149,45 @@ export default class App extends Component {
       });
   };
 
+  handleDrink = (id) => {
+    fetch(`http://localhost:3000/bottles/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json",
+      },
+    }).then(() => this.fetchUserSections(this.state.userId));
+    this.setState({ selectedBottle: null, selectedCell: null });
+  };
+
+  handleEditBottle = (wine, bottle, id) => {
+    let section_id = parseInt(
+      this.state.sections.find((section) => {
+        return section.name === bottle.section;
+      }).id
+    );
+    let bottleToPass = {
+      name: wine.name,
+      winery: wine.winery,
+      year: wine.year,
+      wineType: wine.wineType,
+      size: bottle.size,
+      section_id: section_id,
+      column: bottle.column,
+      row: bottle.row,
+      price: bottle.price,
+    };
+    fetch(`http://localhost:3000/bottles/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accepts": "application/json",
+      },
+      body: JSON.stringify(bottleToPass),
+    }).then(() => this.fetchUserSections(this.state.userId));
+    this.setState({ selectedBottle: null, selectedCell: null });
+  };
+
   patchCoordinates = () => {
     const sectionCoordinates = this.state.sections.map((section) => {
       return {
@@ -263,6 +302,8 @@ export default class App extends Component {
                   selectedBottle={this.state.selectedBottle}
                   handleCellSelect={this.handleCellSelect}
                   selectedSection={this.state.selectedSection}
+                  handleDrink={this.handleDrink}
+                  handleEditBottle={this.handleEditBottle}
                 />
               )}
             />
