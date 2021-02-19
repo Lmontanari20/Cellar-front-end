@@ -73,8 +73,11 @@ class Bottle extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
-    let price = parseInt(this.state.price.replaceAll(",", ""));
+    debugger;
+    let price;
+    typeof this.state.price === "string"
+      ? (price = parseInt(this.state.price.replaceAll(",", "")))
+      : (price = this.state.price);
 
     let wine = {
       name: this.state.name,
@@ -90,8 +93,9 @@ class Bottle extends Component {
       section: this.state.section,
     };
 
-    console.log(wine, bottle);
-    this.props.bottleSubmit(wine, bottle);
+    this.state.formType === "Add Bottle"
+      ? this.props.bottleSubmit(wine, bottle)
+      : this.props.handleEditBottle(wine, bottle, this.props.selectedBottle.id);
 
     this.setState({
       name: "",
@@ -242,7 +246,14 @@ class Bottle extends Component {
               </Col>
               {this.state.formType === "Edit Bottle" ? (
                 <Col xs={2} style={{ textAlign: "right" }}>
-                  <Button variant="danger">Drink Bottle</Button>
+                  <Button
+                    variant="danger"
+                    onClick={() =>
+                      this.props.handleDrink(this.props.selectedBottle.id)
+                    }
+                  >
+                    Drink Bottle
+                  </Button>
                 </Col>
               ) : null}
             </Form.Row>
